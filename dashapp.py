@@ -310,7 +310,7 @@ app.layout = html.Div([
                 min=1,
                 max=max_weight,
                 step=1,
-                value=[200, max_weight],
+                value=[max_weight-10, max_weight],
                 marks={
                     1: {'label': '1'},
                     200: {'label': '200'},
