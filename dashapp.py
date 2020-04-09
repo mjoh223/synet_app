@@ -15,7 +15,7 @@ import socket
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
+server = app.server
 file_name = '/app/net_files/032020_2.tsv'
 network_file = '/app/net_files/032020_1_network.tsv'
 node_attr_file = '/app/net_files/032020_1_network_node_attr.tsv'
@@ -401,4 +401,4 @@ def plot_orfmap(nodeData):
     return json.dumps(nodeData, indent=2), fig, style
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=9999, host='localhost')
+    app.run_server(debug=True)
