@@ -16,9 +16,9 @@ import socket
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
-# file_name = '/app/net_files/032020_2.tsv'
-# network_file = '/app/net_files/032020_1_network.tsv'
-# node_attr_file = '/app/net_files/032020_1_network_node_attr.tsv'
+file_name = '/app/net_files/032020_2.tsv'
+network_file = '/app/net_files/032020_1_network.tsv'
+node_attr_file = '/app/net_files/032020_1_network_node_attr.tsv'
 locus_width = 5000
 h = .5
 s = 1
@@ -195,11 +195,12 @@ def filter_net(df_net, filter):
 #input:
 #output:
 #def plot_network(filtered_net):
-df_attr = csv_parse(node_attr_file,header=0)
-attr_dict = attr_dict_(df_attr)
-df_net = csv_parse(network_file,header=None)
-df_net.columns = ['source','target','weight']
-max_weight = max(df_net.weight)
+
+# df_attr = csv_parse(node_attr_file,header=0)
+# attr_dict = attr_dict_(df_attr)
+# df_net = csv_parse(network_file,header=None)
+# df_net.columns = ['source','target','weight']
+# max_weight = max(df_net.weight)
 cy_edges = []
 cy_nodes = []
 nodes = set()
