@@ -310,7 +310,7 @@ app.layout = html.Div([
                 min=1,
                 max=max_weight,
                 step=1,
-                value=[1, max_weight],
+                value=[200, max_weight],
                 marks={
                     1: {'label': '1'},
                     200: {'label': '200'},
@@ -329,7 +329,7 @@ app.layout = html.Div([
                     id='cytoscape',
                     elements=default_elements,
                     style={'width': '100%', 'height': '800px'},
-                    layout={'name':'cose'},)
+                    layout={'name':'grid'},)
         ],className = 'eight columns')
     ],className="row"),
 
