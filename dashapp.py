@@ -11,6 +11,7 @@ import re
 import random
 import json
 import plotly.express as px
+import socket
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -400,4 +401,4 @@ def plot_orfmap(nodeData):
     return json.dumps(nodeData, indent=2), fig, style
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=9999)
+    app.run_server(debug=True, port=9999, host='localhost')
