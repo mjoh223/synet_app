@@ -19,7 +19,7 @@ server = app.server
 file_name = '/app/net_files/040920_1.tsv'
 network_file = '/app/net_files/040920_1_network.tsv'
 node_attr_file = '/app/net_files/040920_1_network_node_attr.tsv'
-locus_width = 5000
+locus_width = 1500
 h = .5
 s = 1
 #Purpose: Parse the locus attributes file to be drawn on plotly
@@ -310,7 +310,7 @@ app.layout = html.Div([
                 min=1,
                 max=max_weight,
                 step=1,
-                value=[max_weight-10, max_weight],
+                value=[1, max_weight],
                 marks={
                     1: {'label': '1'},
                     200: {'label': '200'},
@@ -329,7 +329,7 @@ app.layout = html.Div([
                     id='cytoscape',
                     elements=default_elements,
                     style={'width': '100%', 'height': '800px'},
-                    layout={'name':'grid'},)
+                    layout={'name':'cose'},)
         ],className = 'eight columns')
     ],className="row"),
 
@@ -394,10 +394,9 @@ def plot_orfmap(nodeData):
     neighbor_nodes = neighbor_node_di.get(nodeData['id'])
     filt_loci_dict = dict(filter(lambda elem: anchor in [x[8] for x in elem[1]], loci_dict.items()))
     fig, n = organize_map(filt_loci_dict, h, locus_width, anchor, neighbor_nodes)
-    print(n*5)
     style = {
         'height': '{}vh'.format(n*5),
-        'width': '100%',
+        'width': '80%',
     }
     return json.dumps(nodeData, indent=2), fig, style
 
