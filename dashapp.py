@@ -216,9 +216,9 @@ neighbor_edge_di = {}
 for i, edges in df_net.iterrows():
     source, target, weight = edges
     if attr_dict[source]['name_'] != '[]' and attr_dict[target]['name_'] != '[]':
-        name_ = ''.join(attr_dict[source]['name_']).replace("'","").replace("]","").replace("[","")
+        s_name_ = ''.join(attr_dict[source]['name_']).replace("'","").replace("]","").replace("[","")
         cy_source = {'data': {'id': source,
-                                   'name_': name_,
+                                   'name_': s_name_,
                                    'member_ids': attr_dict[source]['member_ids'],
                                    'locus': attr_dict[source]['locus'],
                                    'assembly': attr_dict[source]['assembly'],
@@ -231,8 +231,9 @@ for i, edges in df_net.iterrows():
                                    'genus': attr_dict[source]['species'],
                                    'mean_length': attr_dict[source]['mean_length']},
                     }
+        t_name_ = ''.join(attr_dict[target]['name_']).replace("'","").replace("]","").replace("[","")
         cy_target = {'data': {'id': target,
-                                   'name_': name_,
+                                   'name_': t_name_,
                                    'member_ids': attr_dict[target]['member_ids'],
                                    'locus': attr_dict[target]['locus'],
                                    'assembly': attr_dict[target]['assembly'],
@@ -379,11 +380,11 @@ def plot_network(range, nodeData):
             if node['data']['id'] in [n['data']['id'] for n in neighbor_nodes]:
                 node['classes'] = 'neighborNode'
                 updated_nodes.append(node)
-                # default_stylesheet.append({
-                #         'selector': '[id = "{}"]'.format(node['data']['id']),
-                #         'style': {
-                #             'background-color': '{}'.format(clan_dict[node['data']['id']])
-                #         }})
+                default_stylesheet.append({
+                        'selector': '[id = "{}"]'.format(node['data']['id']),
+                        'style': {
+                            'background-color': '{}'.format(clan_dict[node['data']['id']])
+                        }})
     return updated_nodes+updated_edges
 
 @app.callback(Output('cytoscape', 'stylesheet'),
