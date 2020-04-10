@@ -140,7 +140,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
             neighbor_ids = [n['data']['id'] for n in neighbor_nodes]
             neighbor_id_name_ = [[n['data']['id'], n['data']['name_']] for n in neighbor_nodes]
             opacity = 1
-            product = group_data[j][1].replace("'", "").replace("[","").replace("]","")
+            product = ''.join(group_data[j][1]).replace("'", "").replace("[","").replace("]","")
             if clan in neighbor_ids:
                 line_color = 'black'
                 opacity = 1
