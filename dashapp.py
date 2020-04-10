@@ -339,7 +339,7 @@ app.layout = html.Div([
                     id='cytoscape',
                     elements=default_elements,
                     style={'width': '100%', 'height': '800px'},
-                    layout={'name':'euler', 'animate':'True'},)
+                    layout={'name':'cose-bilkent', 'animate':'True'},)
         ],className = 'eight columns')
     ],className="row"),
 
