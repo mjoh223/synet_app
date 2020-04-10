@@ -135,10 +135,13 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
             color = clan_dict[clan]
             line_color = color
             neighbor_ids = [n['data']['id'] for n in neighbor_nodes]
-            opacity = 0.8
+            neighbor_id_name_ = [[n['data']['id'], n['data']['name_']] for n in neighbor_nodes]
+            opacity = 1
+            product = group_data[j][1]
             if clan in neighbor_ids:
                 line_color = 'black'
                 opacity = 1
+                product = [x[1] for x in neighbor_id_name_ if clan in x[0]]
             if orf[2] == '+':
                 fig.add_trace(go.Scatter(
                                 x=(start, start+50, start, stop-50, stop, stop-50, start),
@@ -146,7 +149,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
                                 fill='toself',
                                 fillcolor=color,
                                 line_color=line_color,
-                                hovertemplate='{}<br>'.format(str(group_data[j][1]))+
+                                hovertemplate='{}<br>'.format(str(product))+
                                               '{}<br>'.format(str(group_data[j][2]))+
                                               '{}<br>'.format(str(group_size))+
                                               '{}<br>'.format('<br>'.join(list(group_data[j][3]))),
@@ -159,7 +162,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
                                 fill='toself',
                                 fillcolor=color,
                                 line_color=line_color,
-                                hovertemplate='{}<br>'.format(str(group_data[j][1]))+
+                                hovertemplate='{}<br>'.format(str(product))+
                                               '{}<br>'.format(str(group_data[j][2]))+
                                               '{}<br>'.format(str(group_size))+
                                               '{}<br>'.format('<br>'.join(list(group_data[j][3]))),
@@ -294,8 +297,9 @@ default_stylesheet = [
             "border-width": 2,
             "border-color": "black",
             "border-opacity": 1,
+            "background-color": "white",
             "opacity": 1,
-            'z-index': 9999
+            'z-index': 1
         }
     }
 ]
