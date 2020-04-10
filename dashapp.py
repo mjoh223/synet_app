@@ -34,7 +34,7 @@ def file_parse(fname):
                 anchor = False
                 if line[3] == line[4]:
                     anchor = True
-                key = ' '.join(line[0:4])
+                key = '|'.join(line[0:4])
                 if key in loci_dict.keys():
                     loci_dict[key].append( line[3:]+[anchor] )
                 else:
@@ -124,9 +124,9 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
             showgrid = False,
             zeroline = False)
         )
-    sorted_plot_dict = {k: v for k, v in sorted(plot_dict.items(), key=lambda item: item[1][0][0][3])}
+    sorted_plot_dict = {k: v for k, v in sorted(plot_dict.items(), key=lambda item: item[1][0][0][3].split('|')[1])}
     print(sorted_plot_dict)
-    for i, [k,v] in enumerate(plot_dict.items()):
+    for i, [k,v] in enumerate(sorted_plot_dict.items()):
         group_key = k
         group_data = v[0]
         group_size = v[1]
