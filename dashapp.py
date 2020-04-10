@@ -124,7 +124,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
             showgrid = False,
             zeroline = False)
         )
-    sorted_plot_dict = {k: v for k, v in sorted(plot_dict.items(), key=lambda item: item[1][0][0][3].split('|')[1])}
+    sorted_plot_dict = {k: v for k, v in sorted(plot_dict.items(), key=lambda item: str(item[1][0][0][3]).split('|')[1])}
     print(sorted_plot_dict)
     for i, [k,v] in enumerate(sorted_plot_dict.items()):
         group_key = k
