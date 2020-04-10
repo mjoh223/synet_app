@@ -379,11 +379,11 @@ def plot_network(range, nodeData):
             if node['data']['id'] in [n['data']['id'] for n in neighbor_nodes]:
                 node['classes'] = 'neighborNode'
                 updated_nodes.append(node)
-                default_stylesheet.append({
-                        'selector': '[id = "{}"]'.format(node['data']['id']),
-                        'style': {
-                            'background-color': '{}'.format(clan_dict[node['data']['id']])
-                        }})
+                # default_stylesheet.append({
+                #         'selector': '[id = "{}"]'.format(node['data']['id']),
+                #         'style': {
+                #             'background-color': '{}'.format(clan_dict[node['data']['id']])
+                #         }})
     return updated_nodes+updated_edges
 
 @app.callback(Output('cytoscape', 'stylesheet'),
