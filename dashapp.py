@@ -140,7 +140,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
             neighbor_ids = [n['data']['id'] for n in neighbor_nodes]
             neighbor_id_name_ = [[n['data']['id'], n['data']['name_']] for n in neighbor_nodes]
             opacity = 1
-            product = group_data[j][1]
+            product = group_data[j][1].replace("'", "").replace("[","").replace("]","")
             if clan in neighbor_ids:
                 line_color = 'black'
                 opacity = 1
@@ -152,7 +152,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
                                 fill='toself',
                                 fillcolor=color,
                                 line_color=line_color,
-                                hovertemplate='{}<br>'.format(str(product))+
+                                hovertemplate='{}<br>'.format(product)+
                                               '{}<br>'.format(str(group_data[j][2]))+
                                               '{}<br>'.format(str(group_size))+
                                               '{}<br>'.format('<br>'.join(list(group_data[j][3]))),
@@ -165,7 +165,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
                                 fill='toself',
                                 fillcolor=color,
                                 line_color=line_color,
-                                hovertemplate='{}<br>'.format(str(product))+
+                                hovertemplate='{}<br>'.format(product)+
                                               '{}<br>'.format(str(group_data[j][2]))+
                                               '{}<br>'.format(str(group_size))+
                                               '{}<br>'.format('<br>'.join(list(group_data[j][3]))),
