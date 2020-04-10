@@ -145,6 +145,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
                 line_color = 'black'
                 opacity = 1
                 product = [x[1] for x in neighbor_id_name_ if clan in x[0]]
+                product = ''.join(product).replace("'", "").replace("[","").replace("]","")
             if orf[2] == '+':
                 fig.add_trace(go.Scatter(
                                 x=(start, start+50, start, stop-50, stop, stop-50, start),
@@ -215,8 +216,9 @@ neighbor_edge_di = {}
 for i, edges in df_net.iterrows():
     source, target, weight = edges
     if attr_dict[source]['name_'] != '[]' and attr_dict[target]['name_'] != '[]':
+        name_ = ''.join(attr_dict[source]['name_']).replace("'","").replace("]","").replace("[","")
         cy_source = {'data': {'id': source,
-                                   'name_': attr_dict[source]['name_'],
+                                   'name_': name_,
                                    'member_ids': attr_dict[source]['member_ids'],
                                    'locus': attr_dict[source]['locus'],
                                    'assembly': attr_dict[source]['assembly'],
@@ -230,7 +232,7 @@ for i, edges in df_net.iterrows():
                                    'mean_length': attr_dict[source]['mean_length']},
                     }
         cy_target = {'data': {'id': target,
-                                   'name_': attr_dict[target]['name_'],
+                                   'name_': name_,
                                    'member_ids': attr_dict[target]['member_ids'],
                                    'locus': attr_dict[target]['locus'],
                                    'assembly': attr_dict[target]['assembly'],
