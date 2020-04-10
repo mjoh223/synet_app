@@ -12,7 +12,7 @@ import random
 import json
 import plotly.express as px
 import socket
-
+cyto.load_extra_layouts()
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
@@ -339,7 +339,7 @@ app.layout = html.Div([
                     id='cytoscape',
                     elements=default_elements,
                     style={'width': '100%', 'height': '800px'},
-                    layout={'name':'cose'},)
+                    layout={'name':'klay'},)
         ],className = 'eight columns')
     ],className="row"),
 
@@ -406,7 +406,7 @@ def plot_orfmap(nodeData):
     fig, n = organize_map(filt_loci_dict, h, locus_width, anchor, neighbor_nodes)
     style = {
         'height': '{}vh'.format(n*5),
-        'width': '80%',
+        'width': '100%',
     }
     return json.dumps(nodeData, indent=2), fig, style
 
