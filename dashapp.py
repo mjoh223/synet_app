@@ -139,13 +139,13 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
             line_color = color
             neighbor_ids = [n['data']['id'] for n in neighbor_nodes]
             neighbor_id_name_ = [[n['data']['id'], n['data']['name_']] for n in neighbor_nodes]
-            opacity = 0.2
+            opacity = 0.1
             product = ''.join(group_data[j][1]).replace("'", "").replace("[","").replace("]","")
             if 'ase' in product:#if clan in neighbor_ids:
                 line_color = color#'black'
                 opacity = 1
-                product = [x[1] for x in neighbor_id_name_ if clan in x[0]]
-                product = ''.join(product).replace("'", "").replace("[","").replace("]","")
+                #product = [x[1] for x in neighbor_id_name_ if clan in x[0]]
+                #product = ''.join(product).replace("'", "").replace("[","").replace("]","")
             if orf[2] == '+':
                 fig.add_trace(go.Scatter(
                                 x=(start, start+50, start, stop-50, stop, stop-50, start),
