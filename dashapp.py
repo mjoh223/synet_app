@@ -12,7 +12,7 @@ import random
 import json
 import plotly.express as px
 import socket
-cyto.load_extra_layouts()
+#cyto.load_extra_layouts()
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
@@ -154,6 +154,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
                                 fillcolor=color,
                                 line_color=line_color,
                                 hovertemplate='{}<br>'.format(product)+
+                                              '{}<br>'.format(str(clan))+
                                               '{}<br>'.format(str(group_data[j][2]))+
                                               '{}<br>'.format(str(group_size))+
                                               '{}<br>'.format('<br>'.join(list(group_data[j][3]))),
@@ -167,6 +168,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
                                 fillcolor=color,
                                 line_color=line_color,
                                 hovertemplate='{}<br>'.format(product)+
+                                              '{}<br>'.format(str(clan))+
                                               '{}<br>'.format(str(group_data[j][2]))+
                                               '{}<br>'.format(str(group_size))+
                                               '{}<br>'.format('<br>'.join(list(group_data[j][3]))),
@@ -339,7 +341,7 @@ app.layout = html.Div([
                     id='cytoscape',
                     elements=default_elements,
                     style={'width': '100%', 'height': '800px'},
-                    layout={'name':'cose-bilkent', 'animate': True},)
+                    layout={'name':'cose', 'animate': True},)
         ],className = 'eight columns')
     ],className="row"),
 
