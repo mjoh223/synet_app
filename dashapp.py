@@ -137,7 +137,7 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
             line_color = color
             neighbor_ids = []
             neighbor_id_name_ = []
-            if not neighbor_nodes:
+            if neighbor_nodes:
                 neighbor_ids = [n['data']['id'] for n in neighbor_nodes]
                 neighbor_id_name_ = [[n['data']['id'], n['data']['name_']] for n in neighbor_nodes]
             opacity = 1
