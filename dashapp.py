@@ -404,7 +404,10 @@ def plot_network(elements):
 def plot_orfmap(nodeData, input_id):
     if not nodeData:
         return json.dumps('select node', indent=2), go.Figure(), {}
-    anchor = input_id
+    if input_id:
+        anchor = input_id
+    if nodeData:
+        anchor = nodeData['id']
     neighbor_nodes = neighbor_node_di.get(anchor)
     print(anchor)
     print(neighbor_nodes)
