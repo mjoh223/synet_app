@@ -88,8 +88,6 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
                     filt_arch_set[key].append(updated_locus)
                 else:
                     filt_arch_set[key] = [updated_locus,]
-    #testme = filt_arch_set['WP_031668916.1WP_039194677.1WP_060869021.1YP_009622344.1WP_009928181.1WP_060869024.1WP_031667948.1WP_047933338.1']
-    #print(filt_arch_set)
     plot_dict = {}
     for i, k in enumerate(sorted(filt_arch_set, key=lambda k: len(filt_arch_set[k]), reverse=True)):
         group_locus = filt_arch_set[k]
@@ -116,9 +114,9 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
         yaxis = dict(
             showgrid = False,
             zeroline = False,
-            tickmode = 'array',
-            tickvals = list(range(0,n)),
-            ticktext = list(range(0,n))
+            #tickmode = 'array',
+            #tickvals = list(range(0,n)),
+            #ticktext = list(range(0,n))
         ),
         xaxis = dict(
             showgrid = False,
@@ -137,15 +135,19 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
             start, stop = orf[0], orf[1]
             color = clan_dict[clan]
             line_color = color
-            neighbor_ids = [n['data']['id'] for n in neighbor_nodes]
-            neighbor_id_name_ = [[n['data']['id'], n['data']['name_']] for n in neighbor_nodes]
-            opacity = 0.1
+            neighbor_ids = []
+            neighbor_id_name_ = []
+            if not neighbor_nodes:
+                neighbor_ids = [n['data']['id'] for n in neighbor_nodes]
+                neighbor_id_name_ = [[n['data']['id'], n['data']['name_']] for n in neighbor_nodes]
+            opacity = 1
             product = ''.join(group_data[j][1]).replace("'", "").replace("[","").replace("]","")
-            if 'ase' in product:#if clan in neighbor_ids:
-                line_color = color#'black'
+            #if 'ase' in product:
+            if clan in neighbor_ids:
+                line_color = 'black'
                 opacity = 1
-                #product = [x[1] for x in neighbor_id_name_ if clan in x[0]]
-                #product = ''.join(product).replace("'", "").replace("[","").replace("]","")
+                product = [x[1] for x in neighbor_id_name_ if clan in x[0]]
+                product = ''.join(product).replace("'", "").replace("[","").replace("]","")
             if orf[2] == '+':
                 fig.add_trace(go.Scatter(
                                 x=(start, start+50, start, stop-50, stop, stop-50, start),
@@ -177,7 +179,6 @@ def organize_map(filt_dict, h, locus_width, anchor, neighbor_nodes):
             fig.layout.plot_bgcolor = 'white'
             fig.layout.paper_bgcolor = 'white'
     fig.update_layout(showlegend=False)
-    print('<br>'.join(list(group_data[j][3])))
     return fig, n
 
 #Style for network
@@ -347,6 +348,7 @@ app.layout = html.Div([
 
     html.Div([
         html.H3('orf map'),
+        dcc.Input(id="anchor_accession", type="text", placeholder=""),
         dcc.Graph(id='orf_map',
                   figure=go.Figure())
     ])
@@ -397,14 +399,17 @@ def plot_network(elements):
 @app.callback([Output('cytoscape-tapNodeData-json', 'children'),
               Output('orf_map', 'figure'),
               Output('orf_map', 'style')],
-              [Input('cytoscape', 'tapNodeData')])
-def plot_orfmap(nodeData):
+              [Input('cytoscape', 'tapNodeData'),
+               Input('anchor_accession','value')])
+def plot_orfmap(nodeData, input_id):
     if not nodeData:
         return json.dumps('select node', indent=2), go.Figure(), {}
-    anchor = nodeData['id']
-    anchor_name = nodeData['name_'].replace('[', '').replace(']', '').replace("'", '')
-    neighbor_nodes = neighbor_node_di.get(nodeData['id'])
+    anchor = input_id
+    neighbor_nodes = neighbor_node_di.get(anchor)
+    print(anchor)
+    print(neighbor_nodes)
     filt_loci_dict = dict(filter(lambda elem: anchor in [x[8] for x in elem[1]], loci_dict.items()))
+    print(filt_loci_dict)
     fig, n = organize_map(filt_loci_dict, h, locus_width, anchor, neighbor_nodes)
     style = {
         'height': '{}vh'.format(n*5),
