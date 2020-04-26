@@ -16,9 +16,9 @@ import socket
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
-file_name = '/app/net_files/042020_1.tsv'
-network_file = '/app/net_files/042020_1_network.tsv'
-node_attr_file = '/app/net_files/042020_1_network_node_attr.tsv'
+file_name = 'app/net_files/040920_1.tsv'
+network_file = 'app/net_files/040920_1_network.tsv'
+node_attr_file = 'app/net_files/040920_1_network_node_attr.tsv'
 locus_width = 3000
 h = .5
 s = 1
