@@ -218,7 +218,7 @@ neighbor_node_di = {}
 neighbor_edge_di = {}
 for i, edges in df_net.iterrows():
     source, target, weight = edges
-    if attr_dict[source]['name_'] != '[]' and attr_dict[target]['name_'] != '[]':
+    if attr_dict[source]['name_'] != '[]':
         s_name_ = ''.join(attr_dict[source]['name_']).replace("'","").replace("]","").replace("[","")
         cy_source = {'data': {'id': source,
                                    'name_': s_name_,
@@ -234,6 +234,9 @@ for i, edges in df_net.iterrows():
                                    'genus': attr_dict[source]['species'],
                                    'mean_length': attr_dict[source]['mean_length']},
                     }
+        cy_edge = {"data": {'id': source+target, "source": source, "target": target, 'weight': weight}, }
+
+     if attr_dict[target]['name_'] != '[]': 
         t_name_ = ''.join(attr_dict[target]['name_']).replace("'","").replace("]","").replace("[","")
         cy_target = {'data': {'id': target,
                                    'name_': t_name_,
