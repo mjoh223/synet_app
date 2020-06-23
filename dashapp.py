@@ -236,7 +236,7 @@ for i, edges in df_net.iterrows():
                     }
         cy_edge = {"data": {'id': source+target, "source": source, "target": target, 'weight': weight}, }
 
-     if attr_dict[target]['name_'] != '[]': 
+    if attr_dict[target]['name_'] != '[]': 
         t_name_ = ''.join(attr_dict[target]['name_']).replace("'","").replace("]","").replace("[","")
         cy_target = {'data': {'id': target,
                                    'name_': t_name_,
